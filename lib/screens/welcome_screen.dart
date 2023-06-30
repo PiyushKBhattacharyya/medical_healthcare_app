@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:medical_healthcare_app/screens/login_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   @override
@@ -72,8 +73,10 @@ class WelcomeScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                   child: InkWell(
                     onTap: () {
-                      //   Navigator.push(context, MaterialPageRoute(
-                      //    builder: (context) =>))
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LoginScreen()));
                     },
                     child: Padding(
                       padding:
