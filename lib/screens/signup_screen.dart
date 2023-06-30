@@ -2,14 +2,14 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:medical_healthcare_app/screens/signup_screen.dart';
+import 'package:medical_healthcare_app/screens/login_screen.dart';
 
-class LoginScreen extends StatefulWidget {
+class SignUpScreen extends StatefulWidget {
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   bool PassToggle = true;
   @override
   Widget build(BuildContext context) {
@@ -19,23 +19,37 @@ class _LoginScreenState extends State<LoginScreen> {
         child: SafeArea(
             child: Column(
           children: [
-            SizedBox(
-              height: 10,
-            ),
             Padding(
-              padding: EdgeInsets.all(20),
+              padding: EdgeInsets.all(10),
               child: Image.asset('assets/images/doctors.png'),
-            ),
-            SizedBox(
-              height: 10,
             ),
             Padding(
               padding: EdgeInsets.all(12),
               child: TextField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text("Enter Username"),
+                  label: Text("Full Name"),
                   prefixIcon: Icon(Icons.person),
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(12),
+              child: TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  label: Text("Email Address"),
+                  prefixIcon: Icon(Icons.person),
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(12),
+              child: TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  label: Text("Phone Number"),
+                  prefixIcon: Icon(Icons.phone),
                 ),
               ),
             ),
@@ -45,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 obscureText: PassToggle ? true : false,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    label: Text("Enter password"),
+                    label: Text("Password"),
                     prefixIcon: Icon(Icons.lock),
                     suffixIcon: InkWell(
                       onTap: () {
@@ -63,7 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             SizedBox(
-              height: 20,
+              height: 10,
             ),
             SizedBox(
               width: double.infinity,
@@ -79,7 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     padding: EdgeInsets.symmetric(vertical: 15, horizontal: 40),
                     child: Center(
                       child: Text(
-                        "Log In",
+                        "Create Account",
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 25,
@@ -91,14 +105,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
-            SizedBox(
-              height: 20,
-            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Don't Have an Account?",
+                  "Already have an account?",
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
@@ -107,13 +118,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 TextButton(
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => SignUpScreen()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => LoginScreen()));
                   },
                   child: Text(
-                    'Create Account',
+                    'Log In',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
