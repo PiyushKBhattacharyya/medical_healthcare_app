@@ -1,10 +1,10 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, use_build_context_synchronously, non_constant_identifier_names, use_key_in_widget_constructors
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, use_build_context_synchronously, use_key_in_widget_constructors
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:medical_healthcare_app/screens/dialog_box/dialog_box_login.dart';
-import 'package:medical_healthcare_app/screens/dialog_box/dialog_box_login_email.dart';
 import 'package:medical_healthcare_app/screens/dialog_box/dialog_box_login_pass.dart';
+import 'package:medical_healthcare_app/screens/dialog_box/dialog_box_login_email.dart';
 import 'package:medical_healthcare_app/screens/home_screen.dart';
 import 'package:medical_healthcare_app/screens/signup_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';

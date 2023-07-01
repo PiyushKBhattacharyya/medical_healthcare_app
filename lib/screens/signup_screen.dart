@@ -1,8 +1,10 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, non_constant_identifier_names, use_build_context_synchronously, duplicate_ignore, use_key_in_widget_constructors
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:medical_healthcare_app/screens/dialog_box/dialog_box_register.dart';
 import 'package:medical_healthcare_app/screens/login_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -11,6 +13,51 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   bool PassToggle = true;
+
+  late TextEditingController _textFieldController_name;
+  late TextEditingController _textFieldController_email;
+  late TextEditingController _textFieldController_phno;
+  late TextEditingController _textFieldController_pass;
+
+  @override
+  void initState() {
+    super.initState();
+    _textFieldController_name = TextEditingController();
+    _textFieldController_email = TextEditingController();
+    _textFieldController_phno = TextEditingController();
+    _textFieldController_pass = TextEditingController();
+  }
+
+  void dispose() {
+    _textFieldController_name.dispose();
+    _textFieldController_email.dispose();
+    _textFieldController_phno.dispose();
+    _textFieldController_pass.dispose();
+    super.dispose();
+  }
+
+  Future<void> _register() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String name = _textFieldController_name.text;
+    String email = _textFieldController_email.text;
+    String phno = _textFieldController_phno.text;
+    String pass = _textFieldController_pass.text;
+
+    if (name.isNotEmpty &&
+        email.isNotEmpty &&
+        phno.isNotEmpty &&
+        pass.isNotEmpty) {
+      await prefs.setString('email', email);
+      await prefs.setString('name', name);
+      await prefs.setString('phno', phno);
+      await prefs.setString('password', pass);
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => LoginScreen()));
+    } else {
+      showRequiredFieldsDialog(context);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -26,6 +73,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Padding(
               padding: EdgeInsets.all(12),
               child: TextField(
+                controller: _textFieldController_name,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text("Full Name"),
@@ -36,6 +84,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Padding(
               padding: EdgeInsets.all(12),
               child: TextField(
+                controller: _textFieldController_email,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text("Email Address"),
@@ -46,6 +95,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Padding(
               padding: EdgeInsets.all(12),
               child: TextField(
+                controller: _textFieldController_phno,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text("Phone Number"),
@@ -56,6 +106,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Padding(
               padding: EdgeInsets.all(12),
               child: TextField(
+                controller: _textFieldController_pass,
                 obscureText: PassToggle ? true : false,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
@@ -86,8 +137,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 borderRadius: BorderRadius.circular(10),
                 child: InkWell(
                   onTap: () {
-                    // Navigator.push(context,
-                    //     MaterialPageRoute(builder: (context) => LoginScreen()));
+                    _register();
                   },
                   child: Padding(
                     padding: EdgeInsets.symmetric(vertical: 15, horizontal: 40),
